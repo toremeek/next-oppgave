@@ -23,8 +23,8 @@ const Quiz = () => {
     }, [])
 return (
     <>
-    <h2>Hei fra quiz</h2>
-    <p>Får tilbake fra api-et:</p>
+    <p>Henter ut det som ligger i Api-et:</p>
+    <p>{JSON.stringify(quiz)}</p>
     <CreateQuiz />
     </>
 )

@@ -5,15 +5,19 @@ const CreateQuiz = () => {
     const [quiz, setQuiz] = useState([]);
     const [error, setError] = useState(null);
     const [question, setQuestion] = useState("");
+    const [answere, setAnswere] = useState("");
 
     //håndtere når det skrives noe i unputfeltet
     const handleQuestionChange = (event) => {
         setQuestion(event.target.value)
     }
+    const handleAnswereChange = (event) => {
+        setAnswere(event.target.value)
+    }
     const createQuiz = async () => {
         try{
             //sender med axios, post-req
-            const response = await axios.post("/api/quizApi", {question})
+            const response = await axios.post("/api/quizApi", {question, answers: [{answere}]})
             if(response?.data?.success){
                 setQuiz(response.data.data)
             }
@@ -37,15 +41,24 @@ const CreateQuiz = () => {
     }
     return(
         <div>
-      <h1>Create Quiz</h1>
+      <h2>Legg til quiz-spørsmål</h2>
       <form style={{ marginBottom: '2rem' }} onSubmit={handleSubmit}>
         <label htmlFor="question">Lag nytt spørsmål</label>
         <input
           id="question"
+          placeholder="Legg til et spørsmål"
           type="text"
           name="question"
           value={question}
           onChange={handleQuestionChange}
+        />
+        <input
+          id="anwere"
+          placeholder="legg til et svar"
+          type="text"
+          name="answere"
+          value={answere}
+          onChange={handleAnswereChange}
         />
         <button type="submit">Send</button>
       </form>
