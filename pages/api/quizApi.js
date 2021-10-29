@@ -40,10 +40,12 @@ const quiz = [
 export default function handler(req, res) {
   if(req.method === "POST"){
     const data = req.body;
-    if(!data.question){
+    //får ikke til denne testen, den slår aldri inn
+    if(!data.question || !data.answers){
       res.status(400)
       .json({success: false, error: "Fyll ut alle nødvendige data"})
-    } else{
+    }
+   else{
       quiz.push(data);
     res.status(201).json({success: true, data: quiz})
     }
